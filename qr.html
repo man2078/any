@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>二维码</title>
+
+    <link href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="icon" href="http://ddns.greencyw.com/static/fav1.ico" type="image/x-icon" />
+    <link href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+
+
+</head>
+
+<body>
+
+
+    <h1 class="d-none">英国买房购房房产投资大全</h1>
+    <div id="app">
+        <div class='container text-center'>
+            <canvas style="height:20rem" id='qrInModal'></canvas>
+            <div>微信扫一扫之后输入验证码
+                <input ref='answer' />
+                <button @click='answer($refs.answer.value)'>提交</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.staticfile.org/vue/2.5.17/vue.min.js"></script>
+    <script src="https://cdn.staticfile.org/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/lodash.js/4.17.11/lodash.min.js"></script>
+    <script async defer src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.staticfile.org/qrious/4.0.2/qrious.min.js"></script>
+
+    <script>
+        var v1 = new Vue({
+            el: "#app",
+            data: {
+                r: {},
+            },
+            methods: {
+                answer: function (ans) {
+                    window.location.href = '/qr?answer=' + ans
+                }
+            },
+            mounted: function () {
+                function getQueryString() {
+                    var result = location.search.match(new RegExp("[\?\&][^\?\&]+=[^\?\&]+", "g"));
+                    for (var i = 0; i < result.length; i++) {
+                        result[i] = result[i].substring(1);
+                    }
+                    return result;
+                }
+                let key = getQueryString()[0].substring(2, 99);
+                this.$nextTick(function () {
+                    var qr = new QRious({
+                        element: document.getElementById('qrInModal'),
+                        value: 'https://ukfang.cn/any/key' + key
+                    });
+                })
+            }
+        });
+    </script>
+</body>
+
+
+</html>
